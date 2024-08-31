@@ -16,4 +16,5 @@ final class UserDefaultsStore: ObservableObject {
 
   // 심화
   @AppStorage(wrappedValue: false, "isDarkModeOn") var isDarkModeOn: Bool
+  @AppStorage(wrappedValue: true, "shouldPresentOnboarding") var shouldPresentOnboarding: Bool
 }

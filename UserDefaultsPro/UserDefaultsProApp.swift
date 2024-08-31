@@ -16,6 +16,13 @@ struct UserDefaultsProApp: App {
     WindowGroup {
       ContentView()
         .preferredColorScheme(userDefaultsStore.isDarkModeOn ? .dark : .light)
+        .sheet(
+          isPresented: $userDefaultsStore.shouldPresentOnboarding,
+          onDismiss: { userDefaultsStore.shouldPresentOnboarding = false }
+        )
+      {
+        OnboardingView()
+      }
     }
     .environmentObject(userDefaultsStore)
   }

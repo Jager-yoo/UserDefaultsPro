@@ -15,3 +15,7 @@ struct OnboardingView: View {
       .scaledToFit()
   }
 }
+
+#Preview {
+  OnboardingView()
+}

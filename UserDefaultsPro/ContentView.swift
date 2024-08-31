@@ -46,8 +46,21 @@ struct ContentView: View {
         Toggle("", isOn: $userDefaultsStore.isDarkModeOn)
           .labelsHidden()
       }
+
+      VStack {
+        Text("마지막으로 광고 본 시간")
+        Text(Date(timeIntervalSince1970: userDefaultsStore.lastAdDismissalTime), style: .relative)
+      }
     }
     .font(.title)
+    .sheet(isPresented: Binding(
+      get: { userDefaultsStore.shouldShowBadAD },
+      set: { _ in }))
+    {
+      BadADView()
+        .interactiveDismissDisabled()
+        .presentationDetents([.medium, .fraction(0.7)])
+    }
   }
 }
 

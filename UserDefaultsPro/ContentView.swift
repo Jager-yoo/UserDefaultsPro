@@ -12,7 +12,7 @@ import SwiftUI
 
 struct ContentView: View {
 
-  @StateObject private var userDefaultsStore = UserDefaultsStore()
+  @EnvironmentObject private var userDefaultsStore: UserDefaultsStore
 
   var body: some View {
     VStack(spacing: 60) {
@@ -36,11 +36,16 @@ struct ContentView: View {
       .symbolEffect(.bounce, value: userDefaultsStore.isToggleOn) // iOS 17+
       .frame(width: 200)
 
-      Button("토글 뒤집기") {
-        // @State 사용하듯이 유저디폴트를 쓸 수 있다. 값이 변경되면 View 도 자동으로 다시 그려짐!
-        userDefaultsStore.isToggleOn.toggle()
+      HStack {
+        Label(
+          "\(userDefaultsStore.isDarkModeOn ? "다크모드 ON" : "다크모드 OFF")",
+          systemImage: userDefaultsStore.isDarkModeOn ? "moon.fill" : "sun.max.fill"
+        )
+        .symbolEffect(.bounce, value: userDefaultsStore.isDarkModeOn) // iOS 17+
+
+        Toggle("", isOn: $userDefaultsStore.isDarkModeOn)
+          .labelsHidden()
       }
-      .buttonStyle(.borderedProminent)
     }
     .font(.title)
   }

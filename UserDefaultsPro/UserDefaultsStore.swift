@@ -9,15 +9,28 @@ import SwiftUI
 
 final class UserDefaultsStore: ObservableObject {
 
-  // 기초
-  @AppStorage("isToggleOn") var isToggleOn: Bool = false
-  @AppStorage("name") var name: String = ""
-  @AppStorage("age") var age: Int = 0
+  enum Keys {
+    case isToggleOn
+    case name
+    case age
+    case isDarkModeOn
+    case shouldPresentOnboarding
+    case lastADDismissTime
 
-  // 심화
-  @AppStorage("isDarkModeOn") var isDarkModeOn: Bool = false
-  @AppStorage("shouldPresentOnboarding") var shouldPresentOnboarding: Bool = true
-  @AppStorage("lastADDismissTime") var lastADDismissTime: TimeInterval?
+    var id: String {
+      "\(self)"
+    }
+  }
+  
+  // 기초
+  @AppStorage(Keys.isToggleOn.id) var isToggleOn: Bool = false
+  @AppStorage(Keys.name.id) var name: String = ""
+  @AppStorage(Keys.age.id) var age: Int = 0
+
+  // 응용
+  @AppStorage(Keys.isDarkModeOn.id) var isDarkModeOn: Bool = false
+  @AppStorage(Keys.shouldPresentOnboarding.id) var shouldPresentOnboarding: Bool = true
+  @AppStorage(Keys.lastADDismissTime.id) var lastADDismissTime: TimeInterval?
 
   var shouldShowBadAD: Bool {
     guard shouldPresentOnboarding == false else { return false } // 온보딩하고 충돌하면 안 됨

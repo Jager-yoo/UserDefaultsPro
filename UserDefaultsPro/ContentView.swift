@@ -26,7 +26,7 @@ struct ContentView: View {
       TextField("이름을 입력하세요", text: $userDefaultsStore.name)
         .textFieldStyle(.roundedBorder)
         .frame(width: 300)
-        .tint(.red) // tip) 텍스트 필드 안의 수직선-캐럿(Caret)- 컬러 바꿀 수 있음
+        .tint(.red) // tip) 텍스트 필드 안의 수직선-캐럿(Caret)-컬러 바꿀 수 있음
 
       Toggle(
         "\(userDefaultsStore.isToggleOn ? "토글 ON" : "토글 OFF")",
@@ -49,7 +49,9 @@ struct ContentView: View {
 
       VStack {
         Text("마지막으로 광고 본 시간")
-        Text(Date(timeIntervalSince1970: userDefaultsStore.lastAdDismissalTime), style: .relative)
+        if let lastADDismissTime = userDefaultsStore.lastADDismissTime {
+          Text(Date(timeIntervalSince1970: lastADDismissTime), style: .relative)
+        }
       }
     }
     .font(.title)

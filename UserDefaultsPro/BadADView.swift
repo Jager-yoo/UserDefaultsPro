@@ -20,7 +20,7 @@ struct BadADView: View {
         .scaledToFit()
 
       Button("광고 숨기기") {
-        userDefaultsStore.lastAdDismissalTime = Date.now.timeIntervalSince1970
+        userDefaultsStore.lastADDismissTime = Date.now.timeIntervalSince1970
         dismiss()
       }
     }

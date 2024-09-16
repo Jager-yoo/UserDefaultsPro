@@ -10,20 +10,20 @@ import SwiftUI
 @main
 struct UserDefaultsProApp: App {
 
-  @StateObject private var userDefaultsStore = UserDefaultsStore()
+  @StateObject private var userDefaultsVM = UserDefaultsViewModel()
 
   var body: some Scene {
     WindowGroup {
       ContentView()
-        .preferredColorScheme(userDefaultsStore.isDarkModeOn ? .dark : .light)
+        .preferredColorScheme(userDefaultsVM.isDarkModeOn ? .dark : .light)
         .sheet(
-          isPresented: $userDefaultsStore.shouldPresentOnboarding,
-          onDismiss: { userDefaultsStore.shouldPresentOnboarding = false }
+          isPresented: $userDefaultsVM.shouldPresentOnboarding,
+          onDismiss: { userDefaultsVM.shouldPresentOnboarding = false }
         )
       {
         OnboardingView()
       }
     }
-    .environmentObject(userDefaultsStore)
+    .environmentObject(userDefaultsVM)
   }
 }

@@ -27,12 +27,13 @@ struct ContentView: View {
         systemImage: userDefaultsVM.isToggleOn ? "lightbulb.fill" : "lightbulb",
         isOn: $userDefaultsVM.isToggleOn
       )
-
-      Toggle(
-        "\(userDefaultsVM.isDarkModeOn ? "Dark-Mode ON" : "Dark-Mode OFF")",
-        systemImage: userDefaultsVM.isDarkModeOn ? "moon.fill" : "sun.max.fill",
-        isOn: $userDefaultsVM.isDarkModeOn
-      )
+      
+      Picker("테마 설정", selection: $userDefaultsVM._appTheme) {
+        Text("시스템 설정").tag(0)
+        Text("라이트 모드").tag(1)
+        Text("다크 모드").tag(2)
+      }
+      .pickerStyle(.segmented)
     }
     .font(.title)
     .padding(.horizontal, 40)

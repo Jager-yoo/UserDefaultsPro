@@ -15,7 +15,7 @@ struct UserDefaultsProApp: App {
   var body: some Scene {
     WindowGroup {
       ContentView()
-        .preferredColorScheme(userDefaultsVM.isDarkModeOn ? .dark : .light)
+        .preferredColorScheme(userDefaultsVM.appTheme)
         .sheet(
           isPresented: $userDefaultsVM.shouldPresentOnboarding,
           onDismiss: { userDefaultsVM.shouldPresentOnboarding = false }
